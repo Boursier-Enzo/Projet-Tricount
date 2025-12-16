@@ -1,0 +1,39 @@
+body {
+    background-color: var(--color-background);
+    min-height: 100vh;
+}
+
+.form-control {
+    border-color: var(--color-primary-light);
+    /* vert Bootstrap */
+}
+
+.form-control:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 0.2rem var(--color-primary-light);
+}
+
+
+.btn-primary {
+    background-color: var(--color-primary);
+    border: none;
+    border-radius: 12px;
+    padding: 12px;
+    font-weight: 600;
+}
+
+
+.btn-primary:hover {
+    background-color: var(--color-primary-light);
+}
+
+
+.form-control {
+    border-radius: 10px;
+    padding: 10px 12px;
+}
+
+
+.form-label {
+    font-weight: 500;
+}

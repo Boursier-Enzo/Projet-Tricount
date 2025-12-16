@@ -1,6 +1,5 @@
 <?php ob_start(); ?>
 
-<h1>Accueil</h1>
 
 
 <script src="../assets/js/index.js"></script>
