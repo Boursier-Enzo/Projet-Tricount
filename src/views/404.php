@@ -1,12 +1,11 @@
-<?php ob_start() ?>
+<?php ob_start(); ?>
 <h1>404</h1>
 
-<a href="/">Retour à l'accueil</a>
+<a href="/">Retour à la page de connexion</a>
 
-<?php
-render('default', true, [
-	'title' => 'Error',
-	'css' => '404',
-	'content' => ob_get_clean(),
+<?php render("default", true, [
+  "title" => "Error",
+  "css" => "404",
+  "content" => ob_get_clean(),
 ]);
 ?>

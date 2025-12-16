@@ -18,6 +18,7 @@
 	<main>
 		<?= $content ?>
 	</main>
+	<script src="../assets/js/<?= $js ?>.js"></script>
 </body>
 
 </html>

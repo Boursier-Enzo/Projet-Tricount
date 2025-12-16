@@ -1,7 +1,29 @@
 body {
-  background-color: #181818;
+  background-color: var(--color-background);
 }
 
-h1 {
-  color: #ffffff;
+.form-control {
+  border-color: var(--color-primary-light);
+  /* vert Bootstrap */
+}
+
+.form-control:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 0.2rem var(--color-primary-light);
+}
+
+.btn-login {
+  background-color: var(--color-primary);
+  color: #fff;
+  border-radius: 8px;
+  padding: 8px 30px;
+}
+
+.btn-login:hover {
+  background-color: var(--color-primary-light);
+  color: #fff;
+}
+
+.text-primary-custom {
+  color: var(--color-primary-light);
 }
