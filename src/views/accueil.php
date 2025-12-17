@@ -30,12 +30,21 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title"><?= htmlspecialchars(
+<<<<<<< HEAD
                                                         $tricount->name,
                                                     ) ?></h5>
 
                             <form action="/tricount_details" method="POST">
                                 <input type="hidden" name="id_group" value="<?= $tricount->id ?>">
                                 <button type="submit" class="btn btn-primary btn-sm">Voir</button>
+=======
+                              $tricount->name,
+                            ) ?></h5>
+
+                            <form action="/tricount_details" method="POST">
+                                    <input type="hidden" name="id_group" value="<?= $tricount->id ?>">
+                                    <button type="submit" class="btn btn-primary btn-sm">Voir</button>
+>>>>>>> dev
                             </form>
                         </div>
                     </div>
@@ -74,8 +83,8 @@
 
 
 <?php render("default", true, [
-    "title" => "accueil",
-    "css" => "accueil",
-    "js" => "accueil",
-    "content" => ob_get_clean(),
+  "title" => "accueil",
+  "css" => "accueil",
+  "js" => "accueil",
+  "content" => ob_get_clean(),
 ]); ?>

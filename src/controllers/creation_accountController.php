@@ -26,6 +26,7 @@ if (!empty($_POST)) {
       $user->setPassword($_POST["password"]);
     } catch (\Exception $e) {
       $error["password"] = $e->getMessage();
+      $error["password_confirm"] = $e->getMessage();
     }
   }
 
