@@ -111,7 +111,11 @@ class expense extends Database
 
         return $query->execute();
     }
+<<<<<<< HEAD
     public function solde($groupId)
+=======
+    public function solde($groupId, $tableau)
+>>>>>>> 2a18edd83d174de18e8bdb4a1358a620b2e82302
     {
         $query = $this->db->prepare(
             "SELECT SUM(amount) as total FROM `expenses` WHERE group_id = :group_id"

@@ -1,48 +1,65 @@
 <?php ob_start(); ?>
 
 <div class="container min-vh-100 d-flex justify-content-center align-items-center">
-    <div class="col-12 col-md-6 col-lg-4">
-      <h1 class="mb-5 fw-bold text-center">Connexion</h1>
+  <div class="col-12 col-md-6 col-lg-4">
 
-      <!-- Erreur globale -->
-      <?php if (!empty($error["global"])): ?>
-        <div class="alert alert-danger text-center">
-          <?= htmlspecialchars($error["global"]) ?>
-        </div>
-      <?php endif; ?>
+    <h1 class="mb-5 fw-bold text-center">Connexion</h1>
 
-      <!-- Formulaire -->
-      <form method="post">
+    <form method="post" novalidate>
 
-        <div class="mb-4">
-          <label for="email" class="form-label fw-bold">Email :</label>
-          <input id="email" name="email" type="text" class="form-control">
-        </div>
+      <!-- EMAIL -->
+      <div class="mb-4">
+        <label class="form-label fw-bold">Email</label>
+        <input
+          type="email"
+          name="email"
+          class="form-control <?= !empty($error["email"])
+            ? "is-invalid"
+            : "" ?>"
+          value="<?= htmlspecialchars($_POST["email"] ?? "") ?>"
+        >
+        <?php if (!empty($error["email"])): ?>
+          <div class="invalid-feedback">
+            <?= $error["email"] ?>
+          </div>
+        <?php endif; ?>
+      </div>
 
-        <div class="mb-5">
-          <label for="password" class="form-label fw-bold">Mot de passe :</label>
-          <input id="password" name="password" type="password" class="form-control" required>
-        </div>
+      <!-- PASSWORD -->
+      <div class="mb-5">
+        <label class="form-label fw-bold">Mot de passe</label>
+        <input
+          type="password"
+          name="password"
+          class="form-control <?= !empty($error["password"])
+            ? "is-invalid"
+            : "" ?>"
+        >
+        <?php if (!empty($error["password"])): ?>
+          <div class="invalid-feedback">
+            <?= $error["password"] ?>
+          </div>
+        <?php endif; ?>
+      </div>
 
-        <div class="text-center">
-          <button name="login" type="submit" class="fw-bold btn  btn-login">Se connecter</button>
-        </div>
+      <button name="login" class="fw-bold btn btn-login w-100">
+        Se connecter
+      </button>
 
-        <p class="text-center mt-4">
-          Vous n’avez pas encore de compte ?
-          <a href="/creation_account" class="fw-bold text-primary-custom">
-            Créer un compte
-          </a>
-        </p>
+    </form>
 
+    <p class="text-center mt-4">
+      Vous n’avez pas encore de compte ?
+      <a href="/creation_account" class="fw-bold text-primary-custom">
+        Créer un compte
+      </a>
+    </p>
 
-      </form>
   </div>
 </div>
 
 <?php render("default", true, [
-  "title" => "Connection",
+  "title" => "Connexion",
   "css" => "index",
   "content" => ob_get_clean(),
-]);
-?>
+]); ?>
