@@ -18,7 +18,7 @@ if (!empty($_POST)) {
   try {
     $user->setCreatedBy($_SESSION["id"]);
   } catch (\Exception $e) {
-    $error["username"] = $e->getMessage();
+    $error["id"] = $e->getMessage();
   }
 
   if (empty($error)) {
