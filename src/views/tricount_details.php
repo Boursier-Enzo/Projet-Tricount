@@ -3,22 +3,24 @@
 <div class="container my-5">
 
     <!-- En-tête avec nom du tricount -->
-    <div class="mb-5">
-        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
-            <div>
-                <h1 class="fw-bold mb-2">
-                    <?= htmlspecialchars(
-                      $tricount["name"] ?? "Nom du tricount",
-                    ) ?>
-                </h1>
-                <p class="text-muted mb-0">
-                    <?= count($balances ?? []) ?> participants
-                </p>
+    <div class="container my-5">
+        <div class="mb-5">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+                <div>
+                    <h1 class="fw-bold mb-2">
+                        <?= htmlspecialchars(
+                          $tricount->name ?? "Nom du tricount",
+                        ) ?>
+                    </h1>
+                    <p class="text-muted mb-0">
+                        <?= "0" ?> participants
+                    </p>
+                </div>
+                <a href="/add_expense?tricount_id=<?= $tricount->id ?? "" ?>"
+                   class="btn btn-primary-custom">
+                    + Nouvelle dépense
+                </a>
             </div>
-            <a href="/add_expense?tricount_id=<?= $tricount["id"] ?? "" ?>"
-               class="btn btn-primary-custom">
-                + Nouvelle dépense
-            </a>
         </div>
     </div>
 

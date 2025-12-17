@@ -1,7 +1,7 @@
 <?php ob_start(); ?>
 
 <div class="top-bar d-flex justify-content-between align-items-center">
-    <div>Bonjour, <?= isset($_SESSION["username"]) ? htmlspecialchars($_SESSION["username"]) : "Invité" ?></div>
+    <div>Bonjour, <?= htmlspecialchars($_SESSION["username"]) ?></div>
     <div class="bg-white rounded-circle p-2" role="img" aria-label="Profil utilisateur">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#0d1fbf" class="bi bi-person-fill" viewBox="0 0 16 16" aria-hidden="true">
             <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3z" />
@@ -29,9 +29,14 @@
                 <div class="col-md-6 col-lg-4 mb-3">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title"><?= htmlspecialchars($tricount->name) ?></h5>
+                            <h5 class="card-title"><?= htmlspecialchars(
+                              $tricount->name,
+                            ) ?></h5>
 
-                            <a href="/tricount/<?= $tricount->id ?>" class="btn btn-primary btn-sm">Voir</a>
+                            <form action="/tricount_details" method="POST">
+                                    <input type="hidden" name="id_group" value="<?= $tricount->id ?>">
+                                    <button type="submit" class="btn btn-primary btn-sm">Voir</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -69,8 +74,8 @@
 
 
 <?php render("default", true, [
-    "title" => "accueil",
-    "css" => "accueil",
-    "js" => "accueil",
-    "content" => ob_get_clean(),
+  "title" => "accueil",
+  "css" => "accueil",
+  "js" => "accueil",
+  "content" => ob_get_clean(),
 ]); ?>

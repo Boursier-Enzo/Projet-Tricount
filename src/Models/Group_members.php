@@ -5,7 +5,7 @@ namespace Models;
 use Exception;
 use PDO;
 
-class GroupMember extends Database
+class Group_members extends Database
 {
   public function getMembersByGroupId($groupId)
   {
