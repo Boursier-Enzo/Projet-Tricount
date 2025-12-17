@@ -28,9 +28,51 @@ $participants = $memberModel->getMembersByGroupId($groupId);
 $expenses = [];
 $balances = [];
 
+if (isset($_POST['valider_depense'])) {
+  $depense = new Models\Expense();
+  try {
+    $depense->settitle($_POST['titre']);
+  } catch (\Exception $e) {
+    $error["titre"] = $e->getMessage();
+  }
+  try {
+    $depense->setamount($_POST["montant"]);
+  } catch (\Exception $e) {
+    $error["montant"] = $e->getMessage();
+  }
+  try {
+    $depense->setgroup_id($_SESSION['group_id']);
+  } catch (\Exception $e) {
+    $error["group_id"] = $e->getMessage();
+  }
+  try {
+    $depense->setpaid_by($_SESSION['id']);
+  } catch (\Exception $e) {
+    $error["id"] = $e->getMessage();
+  }
+  if (empty($error)) {
+    try {
+      if ($depense->register()) {
+        redirectTo($_SERVER['REQUEST_URI']);
+        exit();
+      } else {
+        $error["global"] = 'Échec de l\'enregistrement';
+      }
+    } catch (\Exception $e) {
+      $error["global"] = $e->getMessage();
+    }
+  }
+}
+if (isset($_SESSION["id"])) {
+  $expnse = new Models\Expense();
+  $lesexpense = $expnse->getbygroup_id($_SESSION["group_id"]);
+  $la = $expnse->solde($_SESSION["group_id"]);
+}
+
+
 render("tricount_details", false, [
   "tricount" => $tricount,
   "participants" => $participants,
-  "expenses" => $expenses,
-  "balances" => $balances,
+  "expenses" => $lesexpense,
+  "balances" => $la,
 ]);
