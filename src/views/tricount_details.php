@@ -8,15 +8,22 @@
             <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
                 <div>
                     <h1 class="fw-bold mb-2">
-                        <?= htmlspecialchars($tricount->name ?? "Nom du tricount") ?>
+                        <?= htmlspecialchars(
+                          $tricount->name ?? "Nom du tricount",
+                        ) ?>
                     </h1>
                     <p class="text-muted mb-0">
                         <?= count($participants ?? []) ?> participant(s)
                     </p>
                 </div>
-                <button type="button" class="btn btn-primary" onclick="afficherFormulaire()">
-                    Ajouter des dépenses
-                </button>
+                <div class="d-flex gap-1">
+                    <button type="button" class="btn btn-primary-custom" onclick="afficherFormulaire()">
+                        Ajouter des dépenses
+                    </button>
+                    <a href="accueil" class="btn btn-primary-custom-2">
+                        Retour
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -63,16 +70,27 @@
                                 <div class="list-group-item d-flex justify-content-between align-items-center mb-2">
                                     <div>
                                         <h6 class="mb-1 fw-bold">
-                                            <?= htmlspecialchars($expense->title) ?>
+                                            <?= htmlspecialchars(
+                                              $expense->title,
+                                            ) ?>
                                         </h6>
                                         <small class="text-muted">
                                             Payé par : Utilisateur #<?= $expense->paid_by ?>
                                         </small>
                                     </div>
                                     <div class="text-end">
-                                        <span class="badge bg-primary fs-6">
-                                            <?= number_format($expense->amount, 2, ',', ' ') ?> €
+                                        <span class="badge bg-success fs-6">
+                                            <?= number_format(
+                                              $expense->amount,
+                                              2,
+                                              ",",
+                                              " ",
+                                            ) ?> €
                                         </span>
+                                        <form method="post" style="display:inline;">
+                                            <input type="hidden" name="expense_id" value="<?= $expense->id ?>">
+                                            <button type="submit" name="btnDelete" class="btn btn-sm btn-danger">Supprimer</button>
+                                        </form>
                                     </div>
                                 </div>
                             <?php endforeach; ?>
@@ -97,7 +115,7 @@
                 <h2 class="stats-amount">
                     <?php
                     $total = $balances->total ?? 0;
-                    echo number_format($total, 2, ',', ' ');
+                    echo number_format($total, 2, ",", " ");
                     ?> €
                 </h2>
                 <small class="stats-info">
@@ -111,43 +129,67 @@
                     <h5 class="fw-bold mb-0">Soldes</h5>
                 </div>
                 <div class="card-body-custom">
-                    <?php if (!empty($participants) && is_array($participants)): ?>
+                    <?php if (
+                      !empty($participants) &&
+                      is_array($participants)
+                    ): ?>
                         <div class="list-group">
                             <?php
                             $totalDepenses = $balances->total ?? 0;
                             $nbParticipants = count($participants);
-                            $partParPersonne = $nbParticipants > 0 ? $totalDepenses / $nbParticipants : 0;
+                            $partParPersonne =
+                              $nbParticipants > 0
+                                ? $totalDepenses / $nbParticipants
+                                : 0;
 
                             foreach ($participants as $participant):
-                                // Calculer ce que cette personne a payé
-                                $totalPaye = 0;
-                                if (!empty($expenses)) {
-                                    foreach ($expenses as $expense) {
-                                        if ($expense->paid_by == $participant->user_id) {
-                                            $totalPaye += $expense->amount;
-                                        }
-                                    }
-                                }
 
-                                // Calculer le solde (ce qu'il a payé - sa part)
-                                $solde = $totalPaye - $partParPersonne;
-                            ?>
+                              // Calculer ce que cette personne a payé
+                              $totalPaye = 0;
+                              if (!empty($expenses)) {
+                                foreach ($expenses as $expense) {
+                                  if (
+                                    $expense->paid_by == $participant->user_id
+                                  ) {
+                                    $totalPaye += $expense->amount;
+                                  }
+                                }
+                              }
+
+                              // Calculer le solde (ce qu'il a payé - sa part)
+                              $solde = $totalPaye - $partParPersonne;
+                              ?>
                                 <div class="list-group-item d-flex justify-content-between align-items-center">
                                     <div>
                                         <strong>Participant #<?= $participant->user_id ?></strong>
                                         <br>
                                         <small class="text-muted">
-                                            A payé: <?= number_format($totalPaye, 2, ',', ' ') ?> €
+                                            A payé: <?= number_format(
+                                              $totalPaye,
+                                              2,
+                                              ",",
+                                              " ",
+                                            ) ?> €
                                         </small>
                                     </div>
                                     <div>
                                         <?php if ($solde > 0): ?>
                                             <span class="badge bg-success">
-                                                + <?= number_format($solde, 2, ',', ' ') ?> €
+                                                + <?= number_format(
+                                                  $solde,
+                                                  2,
+                                                  ",",
+                                                  " ",
+                                                ) ?> €
                                             </span>
                                         <?php elseif ($solde < 0): ?>
                                             <span class="badge bg-danger">
-                                                <?= number_format($solde, 2, ',', ' ') ?> €
+                                                <?= number_format(
+                                                  $solde,
+                                                  2,
+                                                  ",",
+                                                  " ",
+                                                ) ?> €
                                             </span>
                                         <?php else: ?>
                                             <span class="badge bg-secondary">
@@ -156,7 +198,9 @@
                                         <?php endif; ?>
                                     </div>
                                 </div>
-                            <?php endforeach; ?>
+                            <?php
+                            endforeach;
+                            ?>
                         </div>
                     <?php else: ?>
                         <div class="text-center text-muted py-4">
@@ -173,9 +217,9 @@
 </div>
 
 <?php render("default", true, [
-    "title" => "Détails du Tricount",
-    "css" => "tricount_details",
-    "js" => "tricount_details",
-    "content" => ob_get_clean(),
+  "title" => "Détails du Tricount",
+  "css" => "tricount_details",
+  "js" => "tricount_details",
+  "content" => ob_get_clean(),
 ]);
 ?>

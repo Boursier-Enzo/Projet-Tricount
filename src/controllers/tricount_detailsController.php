@@ -28,10 +28,10 @@ $participants = $memberModel->getMembersByGroupId($groupId);
 $expenses = [];
 $balances = [];
 
-if (isset($_POST['valider_depense'])) {
+if (isset($_POST["valider_depense"])) {
   $depense = new Models\Expense();
   try {
-    $depense->settitle($_POST['titre']);
+    $depense->settitle($_POST["titre"]);
   } catch (\Exception $e) {
     $error["titre"] = $e->getMessage();
   }
@@ -41,19 +41,19 @@ if (isset($_POST['valider_depense'])) {
     $error["montant"] = $e->getMessage();
   }
   try {
-    $depense->setgroup_id($_SESSION['group_id']);
+    $depense->setgroup_id($_SESSION["group_id"]);
   } catch (\Exception $e) {
     $error["group_id"] = $e->getMessage();
   }
   try {
-    $depense->setpaid_by($_SESSION['id']);
+    $depense->setpaid_by($_SESSION["id"]);
   } catch (\Exception $e) {
     $error["id"] = $e->getMessage();
   }
   if (empty($error)) {
     try {
       if ($depense->register()) {
-        redirectTo($_SERVER['REQUEST_URI']);
+        redirectTo($_SERVER["REQUEST_URI"]);
         exit();
       } else {
         $error["global"] = 'Échec de l\'enregistrement';
@@ -63,12 +63,17 @@ if (isset($_POST['valider_depense'])) {
     }
   }
 }
+
+if (isset($_POST["btnDelete"]) && isset($_POST["expense_id"])) {
+  $expnsedlt = new Models\Expense();
+  $expnsedlt->delete($_POST["expense_id"]);
+}
+
 if (isset($_SESSION["id"])) {
   $expnse = new Models\Expense();
   $lesexpense = $expnse->getbygroup_id($_SESSION["group_id"]);
   $la = $expnse->solde($_SESSION["group_id"]);
 }
-
 
 render("tricount_details", false, [
   "tricount" => $tricount,

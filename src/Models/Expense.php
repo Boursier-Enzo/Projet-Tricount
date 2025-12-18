@@ -102,12 +102,12 @@ class Expense extends Database
 
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
-    public function delete($groupId)
+    public function delete($id)
     {
         $query = $this->db->prepare(
             "DELETE FROM `expenses` WHERE id = :id"
         );
-        $query->bindValue(":id", (int)$groupId, PDO::PARAM_INT);
+        $query->bindValue(":id", (int)$id, PDO::PARAM_INT);
 
         return $query->execute();
     }

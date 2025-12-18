@@ -1,168 +1,428 @@
 body {
-    background-color: #f8f9fa;
+  background-color: #f8f9fa;
 }
 
+/* Top bar originale améliorée */
 .top-bar {
-    background-color: #0d1fbf;
-    color: white;
-    padding: 15px 20px;
+  background-color: var(--color-primary);
+  color: white;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.btn-main {
-    background-color: #0d1fbf;
-    color: white;
-    border-radius: 25px;
-    padding: 10px 40px;
-    font-size: 1.1rem;
+.top-bar .d-flex {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.btn-main:hover {
-    background-color: #0b1aa3;
-    color: white;
+.top-bar .user-greeting {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.top-bar .rounded-circle {
+  background-color: white !important;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.top-bar .rounded-circle:hover {
+  transform: scale(1.1);
+}
+
+.top-bar svg {
+  fill: var(--color-primary);
+}
+
+/* Conteneur principal */
+.container {
+  max-width: 1200px;
+  padding-bottom: 100px;
+}
+
+/* Section titre */
+.page-title {
+  text-align: center;
+  margin: 50px 0 40px;
+}
+
+.page-title h1 {
+  color: var(--color-text-main);
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.page-title p {
+  color: var(--color-text-muted);
+  font-size: 1.1rem;
+}
+
+/* Grid des tricounts */
+#les-tricount {
+  margin-top: 30px;
+}
+
+.tricount-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+  padding: 0 20px;
+}
+
+/* Cards modernes */
+.tricount-card {
+  background: white;
+  border-radius: 20px;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: none;
+  position: relative;
+}
+
+.tricount-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(
+    90deg,
+    var(--color-primary),
+    var(--color-primary-light)
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.tricount-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(4, 120, 87, 0.2);
+}
+
+.tricount-card:hover::before {
+  opacity: 1;
+}
+
+.tricount-card-header {
+  background: linear-gradient(
+    135deg,
+    var(--color-primary) 0%,
+    var(--color-primary-light) 100%
+  );
+  padding: 30px 25px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.tricount-card-header::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -30px;
+  width: 150px;
+  height: 150px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+}
+
+.tricount-card-header h5 {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.tricount-card-body {
+  padding: 25px;
+}
+
+.tricount-card-body .btn {
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  padding: 14px 30px;
+  border-radius: 12px;
+  font-weight: 600;
+  width: 100%;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  letter-spacing: 0.3px;
+}
+
+.tricount-card-body .btn:hover {
+  background: var(--color-primary-light);
+  transform: scale(1.03);
+  box-shadow: 0 5px 15px rgba(4, 120, 87, 0.3);
+}
+
+/* État vide */
+.empty-state {
+  text-align: center;
+  padding: 80px 40px;
+  background: white;
+  border-radius: 24px;
+  margin: 40px 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.empty-state-icon {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 30px;
+  background: linear-gradient(
+    135deg,
+    var(--color-primary-light),
+    var(--color-primary)
+  );
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-state-icon svg {
+  width: 50px;
+  height: 50px;
+  fill: white;
+}
+
+.empty-state h3 {
+  color: var(--color-text-main);
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.empty-state p {
+  color: var(--color-text-muted);
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+}
+
+.empty-state .btn {
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  padding: 15px 40px;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.empty-state .btn:hover {
+  background: var(--color-primary-light);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(4, 120, 87, 0.3);
 }
 
 /* Menu flottant */
 .fab-menu {
-    position: fixed;
-    bottom: 90px;
-    /* au-dessus du bouton FAB */
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 999;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
-    transform: translateX(-50%) translateY(10px);
-    /* léger décalage vers le bas au départ */
+  position: fixed;
+  bottom: 100px;
+  right: 30px;
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transform: translateY(20px) scale(0.8);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .fab-menu.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(0);
-    /* position finale */
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
 }
 
+.fab-menu button {
+  background: white;
+  color: var(--color-primary);
+  border: none;
+  padding: 15px 30px;
+  border-radius: 50px;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  min-width: 200px;
+  text-align: left;
+}
+
+.fab-menu button:hover {
+  background: var(--color-primary);
+  color: white;
+  transform: translateX(-8px);
+  box-shadow: 0 6px 20px rgba(4, 120, 87, 0.4);
+}
+
+/* Bouton flottant */
 .fab-wrapper {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 1000;
 }
 
 .fab {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background-color: #0d1fbf;
-    color: white;
-    text-decoration: none;
-    font-size: 32px;
-    line-height: 1;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  width: 64px;
+  height: 64px;
+  color: var(--color-primary);
+  font-size: 60px;
+  font-weight: 300;
+  line-height: 1;
+  text-decoration: none;
+  transition: all 0.3s ease;
 }
 
-/* Modal overlay avec effet vitré */
-/* Modal overlay avec effet vitré NOIR */
+/* Modal */
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    /* Augmenté l'opacité pour plus de noir */
-    backdrop-filter: blur(10px);
-    /* Augmenté le blur */
-    -webkit-backdrop-filter: blur(10px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2000;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
 }
 
 .modal-overlay.active {
-    opacity: 1;
-    visibility: visible;
+  opacity: 1;
+  visibility: visible;
 }
 
-/* Contenu de la modal - plus vitré */
 .modal-content {
-    background: rgba(255, 255, 255, 0.15);
-    /* Plus transparent pour effet vitré */
-    backdrop-filter: blur(20px);
-    /* Plus de blur pour effet givré */
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    /* Bordure pour effet verre */
-    border-radius: 16px;
-    padding: 30px;
-    max-width: 400px;
-    width: 90%;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-    position: relative;
-    transform: scale(0.9);
-    transition: transform 0.3s ease;
+  background: white;
+  border-radius: 24px;
+  padding: 40px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  position: relative;
+  transform: scale(0.9) translateY(20px);
+  transition: transform 0.3s ease;
 }
 
 .modal-overlay.active .modal-content {
-    transform: scale(1);
+  transform: scale(1) translateY(0);
 }
 
-/* Texte plus visible sur fond vitré */
 .modal-content h2 {
-    color: #ffffff;
-    font-weight: bold;
-    text-align: center;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  color: var(--color-text-main);
+  font-weight: 700;
+  font-size: 1.8rem;
+  margin-bottom: 30px;
 }
 
 .modal-content .form-label {
-    font-weight: 500;
-    color: #ffffff;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  font-weight: 600;
+  color: var(--color-text-main);
+  margin-bottom: 8px;
+  font-size: 0.95rem;
 }
 
 .modal-content .form-control {
-    background: rgba(255, 255, 255, 0.9);
-    border: 2px solid rgba(255, 255, 255, 0.5);
-    border-radius: 8px;
-    padding: 10px 15px;
-    transition: border-color 0.2s ease;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 14px 18px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
 }
 
 .modal-content .form-control:focus {
-    background: rgba(255, 255, 255, 1);
-    border-color: #0d1fbf;
-    box-shadow: 0 0 0 0.2rem rgba(13, 31, 191, 0.25);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 4px rgba(4, 120, 87, 0.1);
+  outline: none;
 }
 
-/* Bouton de fermeture blanc */
+.modal-content .btn-primary {
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-primary-light)
+  );
+  border: none;
+  border-radius: 12px;
+  padding: 14px 30px;
+  font-weight: 600;
+  font-size: 1.05rem;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.modal-content .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(4, 120, 87, 0.3);
+}
+
 .modal-close {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: rgba(255, 255, 255, 0.2);
-    border: none;
-    font-size: 28px;
-    color: #ffffff;
-    cursor: pointer;
-    width: 35px;
-    height: 35px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    transition: background-color 0.2s ease;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #f3f4f6;
+  border: none;
+  font-size: 24px;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
 }
 
 .modal-close:hover {
-    background-color: rgba(255, 255, 255, 0.3);
+  background: var(--color-primary);
+  color: white;
+  transform: rotate(90deg);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .page-title h1 {
+    font-size: 2rem;
+  }
+
+  .tricount-grid {
+    grid-template-columns: 1fr;
+    padding: 0 15px;
+  }
+
+  .fab-wrapper {
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .fab-menu {
+    bottom: 90px;
+    right: 20px;
+  }
+
+  .fab-menu button {
+    min-width: 180px;
+  }
 }

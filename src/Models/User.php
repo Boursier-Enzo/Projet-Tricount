@@ -88,6 +88,25 @@ class User extends Database
     return $query->fetch(PDO::FETCH_OBJ);
   }
 
+  public function getUserById(int $id)
+  {
+    if ($id <= 0) {
+      throw new Exception("ID utilisateur invalide");
+    }
+
+    $query = $this->db->prepare(
+      "SELECT id, username, email
+               FROM users
+               WHERE id = :id
+               LIMIT 1",
+    );
+
+    $query->bindValue(":id", $id, PDO::PARAM_INT);
+    $query->execute();
+
+    return $query->fetch(PDO::FETCH_OBJ);
+  }
+
   public function register()
   {
     $checkEmail = $this->db->prepare(
